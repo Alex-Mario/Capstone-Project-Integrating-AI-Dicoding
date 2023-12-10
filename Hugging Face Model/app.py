@@ -4,13 +4,16 @@ from transformers import AutoTokenizer, TFAutoModelForSeq2SeqLM, TFAutoModelForS
 
 app = Flask(__name__)
 
+chk_summ = "Alex034/t5-small-indosum-summary-freeze"
+chk_typo = "Alex034/typo_classifier_2023"
+
 # Summarization model
-summarization_tokenizer = AutoTokenizer.from_pretrained('tokenizer_summarize')
-summarization_model = TFAutoModelForSeq2SeqLM.from_pretrained("model_summarize")
+summarization_tokenizer = AutoTokenizer.from_pretrained(chk_summ)
+summarization_model = TFAutoModelForSeq2SeqLM.from_pretrained(chk_summ)
 
 # Typo classifier model
-typo_classifier_tokenizer = AutoTokenizer.from_pretrained("Alex034/typo_classifier_2023")
-typo_classifier_model = TFAutoModelForSequenceClassification.from_pretrained("Alex034/typo_classifier_2023")
+typo_classifier_tokenizer = AutoTokenizer.from_pretrained(chk_typo)
+typo_classifier_model = TFAutoModelForSequenceClassification.from_pretrained(chk_typo)
 
 @app.route('/summarize', methods=['GET', 'POST'])
 def summarize():
