@@ -1,0 +1,4 @@
+transformers
+flask
+tensorflow
+gunicorn
