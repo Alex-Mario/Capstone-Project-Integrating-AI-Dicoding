@@ -9,7 +9,7 @@ from langchain.chains.summarize import load_summarize_chain
 from langchain.chat_models import ChatOpenAI
 
 # Set API key for OpenAI
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
 app = Flask(__name__, template_folder='templates')
