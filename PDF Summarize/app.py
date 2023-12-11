@@ -26,7 +26,7 @@ def allowed_file(filename):
 def process_pdf(file_path):
     loader = PyPDFLoader(file_path)
     data = loader.load()
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=100)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=5000, chunk_overlap=100)
     chunks = text_splitter.split_documents(data)
     return chunks
 
