@@ -79,11 +79,48 @@
             height: 200px; /* Adjust the height as needed */
             overflow: hidden;
         }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 50px; /* Adjust the top position as needed */
+            left: 50px; /* Adjust the left position as needed */
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            font-size: 18px;
+        }
+
+        .team-button:hover + .overlay,
+        .overlay:hover {
+            display: block;
+        }
+
+        .team-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
     </style>
 
 </head>
 
 <body>
+  <!-- Team button to show team information on hover -->
+    <button class="team-button">Show Team Members</button>
+
+    <!-- Overlay content for the team information -->
+    <div class="overlay">
+        <p>Team C23-IA01:</p>
+        <p>(CC) C319BSY3464 - Al Imamul Luthfi</p>
+        <p>(ML) M319BSY1450 - Abel Agustian Sidauruk</p>
+        <p>(ML) M319BSY1588 - Alex Mario Simanjuntak</p>
+        <p>(ML) M319BSY1601 - Albertman Putra Barasa</p>
+    </div>
 
 <div class="container mt-5 custom-container">
     <h2 class="mb-4" style="font-weight: 700; font-size: 46px;">Text Processing App</h2>
@@ -118,7 +155,7 @@
               <div class="card-body custom-card-body">
                 <h5 class="card-title">PDF Summarization</h5>
                 <p class="card-text">Summarize your PDF File with a click!</p>
-                <a href="#" class="btn btn-primary btn-md">Summarize PDF</a>
+                <a href="/pdf_summarize" class="btn btn-primary btn-md">Summarize PDF</a>
               </div>
             </div>
           </div>
@@ -128,7 +165,7 @@
               <div class="card-body custom-card-body">
                 <h5 class="card-title">Content Comparison</h5>
                 <p class="card-text">Compare multiple contents</p>
-                <a href="#" class="btn btn-primary btn-md">Compare Content</a>
+                <a href="/compare" class="btn btn-primary btn-md">Compare Content</a>
               </div>
             </div>
           </div>
