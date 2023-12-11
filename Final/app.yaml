@@ -1,0 +1,9 @@
+runtime: python311
+
+instance_class: F4_1G
+
+entrypoint: gunicorn -b :$PORT app:app --timeout 120
+
+env_variables:
+  TF_FORCE_GPU_ALLOW_GROWTH: "true"
+  PORT: 8080
