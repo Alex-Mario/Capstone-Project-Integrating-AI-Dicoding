@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Processing Home</title>
@@ -72,51 +72,18 @@
         }
 
         .custom-card {
-            max-width: 300px;
+            max-width: 350px;
             margin-bottom: 20px;
+        }
+        .custom-card-body {
+            height: 200px; /* Adjust the height as needed */
+            overflow: hidden;
         }
     </style>
 
 </head>
 
 <body>
-
-    <div class="container">
-        <nav class="navbar navbar-expand-lg text-center mx-auto">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                      Summarization
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="/summarizer">Text</a></li>
-                      <li><a class="dropdown-item" href="#">PDF</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/classifier">Misspell Checker</a>
-                  </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Content Comparison</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Content Generation</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Learning Recommendation</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-    </div>
-    
-
 
 <div class="container mt-5 custom-container">
     <h2 class="mb-4" style="font-weight: 700; font-size: 46px;">Text Processing App</h2>
@@ -125,7 +92,7 @@
     <div class="container custom-container" style="align-content: center;">
         <div class="row">
           <div class="col">
-            <div class="card custom-card">
+            <div class="card custom-card custom-card-body">
               <div class="card-body">
                 <h5 class="card-title">Text Summarization</h5>
                 <p class="card-text">Summarize text with a click!</p>
@@ -133,19 +100,63 @@
               </div>
             </div>
           </div>
-      
+
           <div class="col">
             <div class="card custom-card">
-              <div class="card-body">
+              <div class="card-body custom-card-body">
                 <h5 class="card-title">Misspell Checker</h5>
                 <p class="card-text">Check if your text has any misspelling!</p>
-                <a href="/summarize" class="btn btn-primary btn-md">Check Misspelling</a>
+                <a href="/classify" class="btn btn-primary btn-md">Check Misspelling</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="card custom-card">
+              <div class="card-body custom-card-body">
+                <h5 class="card-title">PDF Summarization</h5>
+                <p class="card-text">Summarize your PDF File with a click!</p>
+                <a href="#" class="btn btn-primary btn-md">Summarize PDF</a>
               </div>
             </div>
           </div>
 
+          <div class="col">
+            <div class="card custom-card">
+              <div class="card-body custom-card-body">
+                <h5 class="card-title">Content Comparison</h5>
+                <p class="card-text">Compare multiple contents</p>
+                <a href="#" class="btn btn-primary btn-md">Compare Content</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="card custom-card">
+              <div class="card-body custom-card-body">
+                <h5 class="card-title">Edu-content Generation</h5>
+                <p class="card-text">Generate educational content based on subject</p>
+                <a href="/content_generation" class="btn btn-primary btn-md">Generate Content</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card custom-card">
+              <div class="card-body custom-card-body">
+                <h5 class="card-title">Learning Recommendation</h5>
+                <p class="card-text">Provide learning recommendation based on subject</p>
+                <a href="/recommendation" class="btn btn-primary btn-md">Get References</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

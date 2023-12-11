@@ -10,28 +10,28 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            background-color: #f0f0f0; /* Change background color */
         }
         .container {
-            margin-top: 50px;
+            /* margin-top: 50px; */
         }
-
-        form {
-            background-color: #ffffff;
+        .container2 {
+            max-width: 800px;
+            margin: 50px auto;
             padding: 20px;
+            background-color: white;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative;
         }
-        label {
-            font-weight: bold;
-        }
-        textarea {
-            resize: none;
+
+        textarea.form-control {
+
+        resize: none;
         }
         input[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #007BFF;
+            color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
@@ -51,37 +51,98 @@
             top: 10px;
             right: 10px;
         }
+        .navbar {
+            max-width: fit-content;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 2px solid #ced4da;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: #495057;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .nav-link:hover {
+            background-color: #e2e6ea;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .navbar a {
+            color: #0068c9;
+            padding: 8px 15px;
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h1 class="mb-4">Misspell Classification</h1>
-
-        <form method="post">
-            <div class="form-group">
-                <label for="user_input">Enter Text:</label>
-                <textarea class="form-control" id="user_input" name="user_input" rows="4">{{ user_input }}</textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Classify</button>
-            <div class="back-to-home">
-                <a href="/" class="btn btn-secondary">Back to Home</a>
-            </div>
-        </form>
-
-        {% if predicted_label %}
-            <div class="result">
-                <h2>Result:</h2>
-                <h4>The input is classified as: {{ predicted_label }}</h4>
-            </div>
-        {% endif %}
-
+        <nav class="navbar navbar-expand-lg text-center mx-auto">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                  </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                      Summarization
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/summarize">Text</a></li>
+                      <li><a class="dropdown-item" href="#">PDF</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/classify">Misspell Checker</a>
+                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Content Comparison</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/content_generation">Content Generation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/recommendation">Learning Recommendation</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
     </div>
 
-    <!-- Add Bootstrap JS and Popper.js scripts -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-U6d2iKoF83VdAkdAVL6G/JlFAYq3eE2eAASqpb6DFOBA5zPCEpGEBizA7fKIhF" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</nav>
+</div>
+
+<div class="container2">
+    <h1 class="mb-4">Misspell Classification</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="user_input">Enter Text:</label>
+            <textarea class="form-control" id="user_input" name="user_input" rows="4" placeholder="Input your text here">{{ user_input }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Classify</button>
+    </form>
+
+    {% if predicted_label %}
+        <div class="result">
+            <h2>Result:</h2>
+            <h4>The input is classified as: {{ predicted_label }}</h4>
+        </div>
+    {% endif %}
+
+</div>
+
+<!-- Add Bootstrap JS and Popper.js scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-U6d2iKoF83VdAkdAVL6G/JlFAYq3eE2eAASqpb6DFOBA5zPCEpGEBizA7fKIhF" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
