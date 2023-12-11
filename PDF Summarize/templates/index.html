@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Summarization Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="upload-container">
+        <h1>PDF Summarization Tool</h1>
+        <p>Upload a PDF file and receive a concise summary.</p>
+        <form action="/" method="post" enctype="multipart/form-data" class="upload-form" onsubmit="onSubmit()">
+            <div class="file-upload-wrapper">
+                <input type="file" name="pdf_file" id="pdf_file" class="input-file" accept="application/pdf" required>
+                <label for="pdf_file" class="file-upload-label">Drag and drop file here or <span class="file-upload-btn">Browse files</span></label>
+            </div>
+            <div class="upload-warning" id="upload-warning">Please select a PDF file</div>
+            <button type="submit" class="upload-button" onclick="onSubmit()">Upload</button>
+        </form>
+
+        <div class="loading" id="loading">
+          <div class="spinner"></div>
+      </div>
+
+        {% if summary %}
+            <div class="summary-section">
+                <h2>Summary:</h2>
+                <div class="summary-content">{{ summary }}</div>
+            </div>
+        {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
