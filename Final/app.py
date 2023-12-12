@@ -43,7 +43,17 @@ def summarize():
     if request.method == 'POST':
         document = request.form['document']
         inputs = summarization_tokenizer(document, return_tensors="tf")
-        outputs = summarization_model.generate(inputs.input_ids, max_length = 1024, min_length = 512)
+
+        word_count = len(document.split())
+
+        if word_count <= 256:
+            max_length = 256
+            min_length = 0
+        else:
+            max_length = 1024
+            min_length = 512
+
+        outputs = summarization_model.generate(inputs.input_ids, max_length=max_length, min_length=min_length)
         summary = summarization_tokenizer.decode(outputs[0], skip_special_tokens=True)
         return render_template('summarize.html', document=document, summary=summary)
     return render_template('summarize.html', document='', summary='')
