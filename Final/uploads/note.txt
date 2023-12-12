@@ -1,0 +1,2 @@
+contains a pdf file while processing the summary.
+files are automatically deleted after processing
