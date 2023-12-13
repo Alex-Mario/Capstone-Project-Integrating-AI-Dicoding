@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='photo/logo.jpg') }}" type="image/jpeg">
     <title>Text Processing Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,30 +80,24 @@
             height: 200px; /* Adjust the height as needed */
             overflow: hidden;
         }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 50px; /* Adjust the top position as needed */
-            left: 50px; /* Adjust the left position as needed */
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            font-size: 18px;
-        }
-
-        .team-button:hover + .overlay,
-        .overlay:hover {
-            display: block;
-        }
 
         .team-button {
+            font-size: 15px;
+            outline: none;
             background-color: #007bff;
             color: #fff;
-            padding: 10px;
+            padding: 10px 20px;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+            margin-left: 5px;
+        }
+
+        .team-button:hover {
+            background-color: #0056b3;
+            color: #fff;
+            transform: scale(1.05);
         }
 
     </style>
@@ -110,21 +105,12 @@
 </head>
 
 <body>
-  <!-- Team button to show team information on hover -->
-    <button class="team-button">Show Team Members</button>
-
-    <!-- Overlay content for the team information -->
-    <div class="overlay">
-        <p>Team C23-IA01:</p>
-        <p>(CC) C319BSY3464 - Al Imamul Luthfi</p>
-        <p>(ML) M319BSY1450 - Abel Agustian Sidauruk</p>
-        <p>(ML) M319BSY1588 - Alex Mario Simanjuntak</p>
-        <p>(ML) M319BSY1601 - Albertman Putra Barasa</p>
-    </div>
 
 <div class="container mt-5 custom-container">
     <h2 class="mb-4" style="font-weight: 700; font-size: 46px;">Text Processing App</h2>
     <p>Welcome to the Text Processing App! Choose an option:</p>
+    <!-- Team button to show team information on hover -->
+    <button class="team-button" onclick="window.location.href='/about_us.html'">About Us</button>
 
     <div class="container custom-container" style="align-content: center;">
         <div class="row">

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='photo/logo.jpg') }}" type="image/jpeg">
+    <title>About Us - Team C23-IA01</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 20px auto;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .team-member {
+            text-align: center;
+            margin: 20px;
+            flex: 1;
+        }
+
+        .team-member img {
+            border-radius: 50%;
+            width: 150px; /* Lebar maksimum */
+            height: 150px; /* Tinggi maksimum */
+            object-fit: cover; /* Menjaga aspek rasio */
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-links a {
+            margin: 0 5px;
+            margin-top: 10px;
+        }
+
+        .social-links img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .navbar {
+            max-width: fit-content;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 2px solid #ced4da;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: #495057;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .nav-link:hover {
+            background-color: #e2e6ea;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .navbar a {
+            color: #0068c9;
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg text-center mx-auto">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                  </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                      Summarization
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/summarize">Text</a></li>
+                      <li><a class="dropdown-item" href="/pdf_summarize">PDF</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/classify">Misspell Checker</a>
+                  </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/compare">Content Comparison</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/content_generation">Content Generation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/recommendation">Learning Recommendation</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+    </div>
+
+    <header>
+        <h1>About Us - Team C23-IA01</h1>
+    </header>
+
+    <section>
+
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='photo/imamul.jpg') }}" alt="Al Imamul Luthfi">
+            <h5>Al Imamul Luthfi</h5>
+            <p><strong>Posisi:</strong> Cloud Computing (CC)<br>
+            <strong>ID:</strong> C319BSY3464</p>
+            <div class="social-links">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/alimamul/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/480px-LinkedIn_logo_initials.png" alt="LinkedIn"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"></a>
+            </div>
+        </div>
+
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='photo/abel.jpg') }}" alt="Abel Agustian Sidauruk">
+            <h5>Abel Agustian Sidauruk</h5>
+            <p><strong>Posisi:</strong> Machine Learning (ML)<br>
+            <strong>ID:</strong> M319BSY1450</p>
+            <div class="social-links">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/abel-agustian-sidauruk-70b818236/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/480px-LinkedIn_logo_initials.png" alt="LinkedIn"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"></a>
+            </div>
+        </div>
+
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='photo/alex.jpg') }}" alt="Alex Mario Simanjuntak">
+            <h5>Alex Mario Simanjuntak</h5>
+            <p><strong>Posisi:</strong> Machine Learning (ML)<br>
+            <strong>ID:</strong> M319BSY1588</p>
+            <div class="social-links">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/alex-mario-simanjuntak/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/480px-LinkedIn_logo_initials.png" alt="LinkedIn"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"></a>
+            </div>
+        </div>
+
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='photo/albert.jpg') }}" alt="Albertman Putra Barasa">
+            <h5>Albertman Putra Barasa</h5>
+            <p><strong>Posisi:</strong> Machine Learning (ML)<br>
+            <strong>ID:</strong> M319BSY1601</p>
+            <div class="social-links">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/albertman-putra-barasa/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/480px-LinkedIn_logo_initials.png" alt="LinkedIn"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"></a>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        &copy; 2023 Team C23-IA01
+    </footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-Q6Fgs/1r8dIXVw2xhxbsTtFq2QDg7OA95P02CYc+3lDfR6c4Sahj11N56vSpvbl5" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</html>

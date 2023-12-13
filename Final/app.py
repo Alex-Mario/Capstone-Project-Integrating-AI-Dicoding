@@ -19,9 +19,9 @@ from langchain.chains.summarize import load_summarize_chain
 from openai import OpenAI
 import os
 
-api_key = 'sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-openai_api_key = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-api_key_pdf = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+api_key = 'sk-xxxxxxxxxxxxxxxxxxxxxxxxxx'
+openai_api_key = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxx"
+api_key_pdf = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 secret_key = os.urandom(24)
 app = Flask(__name__)
@@ -375,6 +375,10 @@ def pdf_summarize():
     response.headers['Pragma'] = 'no-cache'
     response.headers['Expires'] = '0'
     return response
+
+@app.route('/about_us.html')
+def about_us():
+    return render_template('about_us.html')
 
 @app.route('/')
 def home():
