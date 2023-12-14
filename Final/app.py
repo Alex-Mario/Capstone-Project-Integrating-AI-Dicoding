@@ -217,84 +217,69 @@ def content_generation():
 
     return render_template('content_generation.html', response=response)
 
-#Compare Code
+#compare code
 
-# to get documents
-def get_pdf_text(pdf_docs):
-    text = ""
-    for pdf in pdf_docs:
-        with pdfplumber.open(pdf) as pdf_document:
-            for page in pdf_document.pages:  # Iterate through each page
-                text += page.extract_text()
+def extract_text_from_pdf(pdf_stream):
+    with pdfplumber.open(pdf_stream) as pdf:
+        text = ""
+        for page in pdf.pages:
+            # Reduce the token limit on each PDF page
+            text += page.extract_text()[:1000]  # Example: Token limit 1000
     return text
 
-# to process our documents
-def get_text_chunks(text):
-    text_splitter = CharacterTextSplitter(
-        separator="\n",
-        chunk_size=1000,
-        chunk_overlap=200,
-        length_function=len
+def translate_to_indonesian2(text):
+    response = openai.completions.create(
+        model="text-davinci-003",
+        prompt="Translate the following English text to Indonesian:\n\n" + text,
+        temperature=0.4,
+        max_tokens=500
     )
-    chunks = text_splitter.split_text(text)
-    return chunks
+    return response.choices[0].text.strip()
 
-# embeddings the documents
-def get_vectorstore(text_chunks):
-    embeddings = OpenAIEmbeddings(api_key=openai_api_key)
-    vectorstore = FAISS.from_texts(texts=text_chunks, embedding=embeddings)
-    return vectorstore
+# Fungsi untuk membandingkan dua teks menggunakan OpenAI API
+def compare_texts(text1, text2):
+    # Detect the language of the first text
+    lang = detect(text1)
 
-# conversation based on documents
-def get_conversation_chain(vectorstore):
-    llm = ChatOpenAI(api_key=openai_api_key)
-    memory = ConversationBufferMemory(
-        memory_key='chat_history', return_messages=True)
-    conversation_chain = ConversationalRetrievalChain.from_llm(
-        llm=llm,
-        retriever=vectorstore.as_retriever(),
-        memory=memory
+    openai.api_key = openai_api_key
+    prompt = f"Compare the following two texts:\n\nPDF 1:\n{text1[:2000]}\n\nPDF 2:\n{text2[:2000]}\n\nComparison:"
+
+    # Using the 'openai.Completion.create' method
+    response = openai.completions.create(
+        model="text-davinci-003",
+        prompt=prompt,
+        temperature=0,
+        max_tokens=1000,  # Reduce the token limit for the completion
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0
     )
-    return conversation_chain
 
-# For handle user input
-def handle_userinput(user_question, conversation):
-    if conversation is None:
-        return "Please upload documents and click the 'Process' button first."
+    if lang == "id":
+        # Translate the response to the desired language
+        translated_response = translate_to_indonesian2(response.choices[0].text.strip())
+    else:
+        translated_response = response.choices[0].text.strip()
 
-    response = conversation({'question': user_question})
-    chat_history = response['chat_history']
-    result = []
-
-    for i, message in enumerate(chat_history):
-        if i % 2 == 0:
-            result.append(f"{message.content}")
-        else:
-            result.append(f"{message.content}")
-
-    return result
+    return translated_response
 
 @app.route('/compare', methods=['GET', 'POST'])
 def compare():
-    # load_dotenv()
+    success_message = None
+    result = None
 
     if request.method == 'POST':
-        pdf_docs = request.files.getlist('pdf_docs')
-        user_question = request.form['user_question']
+        pdf_files = request.files.getlist('pdf_docs')
+        # user_question = request.form['user_question']
 
-        if not pdf_docs:
-            return "Please upload your document first."
-        else:
-            raw_text = get_pdf_text(pdf_docs)
-            text_chunks = get_text_chunks(raw_text)
-            vectorstore = get_vectorstore(text_chunks)
-            conversation = get_conversation_chain(vectorstore)
+        # Use binary mode ('rb') when reading PDF files
+        texts = [extract_text_from_pdf(pdf.stream) for pdf in pdf_files]
 
-            result = handle_userinput(user_question, conversation)
+        result = compare_texts(*texts)
 
-            return render_template('compare.html', result=result, success_message="Documents processing successfully")
+        success_message = "Comparison successful!"
 
-    return render_template('compare.html', result=None, success_message=None)
+    return render_template('compare.html', success_message=success_message, result=result)
 
 # PDF Summarize Code
 
