@@ -5,7 +5,7 @@ import openai
 import time
 from transformers import AutoTokenizer, TFAutoModelForSeq2SeqLM, TFAutoModelForSequenceClassification
 import pdfplumber
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
@@ -19,15 +19,22 @@ from langchain.chains.summarize import load_summarize_chain
 from openai import OpenAI
 import os
 
-api_key = 'sk-xxxxxxxxxxxxxxxxxxxxxxxxxx'
-openai_api_key = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxx"
-api_key_pdf = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxx"
+api_key = 'sk-xxxxxxxxxxxxxxxxxxxxxxxx'
+openai_api_key = 'sk-xxxxxxxxxxxxxxxxxxxxxxxx'
+api_key_pdf = 'sk-xxxxxxxxxxxxxxxxxxxxxxxx'
 
 secret_key = os.urandom(24)
 app = Flask(__name__)
 app.secret_key = secret_key
 
-app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
+# Define the UPLOAD_FOLDER variable outside the app.route so that it is accessible globally
+upload_folder = os.path.join('/tmp', 'uploads')
+
+if not os.path.exists(upload_folder):
+    os.makedirs(upload_folder)
+
+app.config['UPLOAD_FOLDER'] = upload_folder
+
 client_pdf = OpenAI(api_key=api_key_pdf)
 
 # Summarization model
@@ -87,7 +94,7 @@ def recommendation():
 
         assistant = client.beta.assistants.create(
             name="Dico Reference",
-            instructions="Provide minimum 10 learning material references based on specified prompts, language output based on the input language",
+            instructions="Provide minimum 10 learning material references based on specified prompts",
             model="gpt-3.5-turbo-1106"
         )
 
@@ -103,7 +110,7 @@ def recommendation():
         run = client.beta.threads.runs.create(
             thread_id=thread.id,
             assistant_id=assistant.id,
-            instructions="Provide minimum 10 learning material references based on specified prompts, language output based on the input language"
+            instructions="Provide minimum 10 learning material references based on specified prompts"
         )
 
         while True:
@@ -269,7 +276,7 @@ def handle_userinput(user_question, conversation):
 
 @app.route('/compare', methods=['GET', 'POST'])
 def compare():
-    load_dotenv()
+    # load_dotenv()
 
     if request.method == 'POST':
         pdf_docs = request.files.getlist('pdf_docs')
@@ -362,8 +369,14 @@ def pdf_summarize():
             # Store the summary in session
             session['final_summary'] = final_summary
 
-            # Hapus file setelah selesai
-            os.remove(file_path)
+            # Hapus semua file dalam folder UPLOAD_FOLDER
+            for uploaded_file in os.listdir(app.config['UPLOAD_FOLDER']):
+                file_path_to_delete = os.path.join(app.config['UPLOAD_FOLDER'], uploaded_file)
+                try:
+                    if os.path.isfile(file_path_to_delete):
+                        os.remove(file_path_to_delete)
+                except Exception as e:
+                    print(f"Error deleting file {file_path_to_delete}: {str(e)}")
 
             return redirect(request.url)  # Redirect to GET after POST to prevent resubmission
 
