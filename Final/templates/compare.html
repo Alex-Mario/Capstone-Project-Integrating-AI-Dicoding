@@ -92,8 +92,13 @@
             </div>
 
             <div class="form-group">
-                <label for="user_question">Ask a question about your documents:</label>
-                <input type="text" class="form-control" name="user_question" id="user_question" required>
+                <label for="user_question">Choose Comparison Type:</label>
+                <select class="form-control" name="user_question" id="user_question" required>
+                    <option value="perbedaan">Berdasarkan isi konten semua file, berikan perbedaannya.</option>
+                    <option value="persamaan">Berdasarkan isi konten semua file, berikan persamaannya.</option>
+                    <option value="differences">Based on the content of all files, provide their differences.</option>
+                    <option value="similarities">Based on the content of all files, provide their similarities.</option>
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Process 🚀</button>
