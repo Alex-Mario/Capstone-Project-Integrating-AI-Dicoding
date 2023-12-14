@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ url_for('static', filename='photo/logo.jpg') }}" type="image/jpeg">
-    <title>Chat with Your Docs</title>
+    <title>Content Comparison</title>
+    <!-- Include your stylesheets and scripts here -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         /* Add your additional CSS styles here */
@@ -18,6 +19,8 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative;
         }
+
+        /* Adjusted styles from your original CSS */
         .navbar {
             max-width: fit-content;
             background-color: #f8f9fa;
@@ -25,6 +28,7 @@
             border-bottom: 2px solid #ced4da;
             font-family: 'Source Sans 3', sans-serif;
         }
+
         .nav-link {
             text-decoration: none;
             color: #495057;
@@ -32,16 +36,36 @@
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
         }
+
         .nav-link:hover {
             background-color: #e2e6ea;
             color: #007bff;
             text-decoration: none;
         }
+
         .navbar a {
             color: #0068c9;
             padding: 8px 15px;
         }
     </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const fileInput = document.querySelector('input[type="file"]');
+
+            fileInput.addEventListener('change', function () {
+                const selectedFiles = this.files;
+                const minFiles = 2;
+                const maxFiles = 2;
+
+                if (selectedFiles.length < minFiles || selectedFiles.length > maxFiles) {
+                    alert(`Please input 2 pdf files`);
+                    this.value = ''; // Clear the selected files
+                }
+            });
+        });
+    </script>
+
 </head>
 <body>
     <div class="container">
@@ -83,22 +107,12 @@
     </div>
 
     <div class="container2">
-        <h1 class="mt-1">Chat with multiple Contents 🤖</h1>
+        <h1 class="mt-1">Content Comparison 🤖</h1>
 
-        <form method="post" enctype="multipart/form-data" class="mt-4">
+        <form method="post" action="/compare" enctype="multipart/form-data" class="mt-4">
             <div class="form-group">
                 <label for="pdf_docs">Upload your PDFs here:</label>
-                <input type="file" class="form-control-file" name="pdf_docs" id="pdf_docs" multiple required>
-            </div>
-
-            <div class="form-group">
-                <label for="user_question">Choose Comparison Type:</label>
-                <select class="form-control" name="user_question" id="user_question" required>
-                    <option value="perbedaan">Berdasarkan isi konten semua file, berikan perbedaannya.</option>
-                    <option value="persamaan">Berdasarkan isi konten semua file, berikan persamaannya.</option>
-                    <option value="differences">Based on the content of all files, provide their differences.</option>
-                    <option value="similarities">Based on the content of all files, provide their similarities.</option>
-                </select>
+                <input style="margin-top: 15px; margin-bottom: 30px;" type="file" class="form-control-file" name="pdf_docs" accept=".pdf" multiple required>
             </div>
 
             <button type="submit" class="btn btn-primary">Process 🚀</button>
@@ -109,27 +123,8 @@
         {% endif %}
 
         {% if result %}
-            <div class="mt-4">
-                {% for message in result %}
-                    {% if loop.index0 % 2 == 0 %}
-                        <div class="media">
-                            <img src="https://i.ibb.co/CJ37DpH/moon.jpg" class="mr-3" alt="User Avatar" width="50">
-                            <div class="media-body">
-                                <h5 class="mt-0">User</h5>
-                                {{ message | safe }}
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="media mt-3">
-                            <img src="https://i.ibb.co/7SVZvWb/bot.png" class="mr-3" alt="Bot Avatar" width="50">
-                            <div class="media-body">
-                                <h5 class="mt-0">Bot</h5>
-                                {{ message | safe }}
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
+            <h2 class="mt-4">Comparison Result:</h2>
+            <p>{{ result }}</p>
         {% endif %}
     </div>
 
@@ -137,6 +132,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-Q6Fgs/1r8dIXVw2xhxbsTtFq2QDg7OA95P02CYc+3lDfR6c4Sahj11N56vSpvbl5" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
