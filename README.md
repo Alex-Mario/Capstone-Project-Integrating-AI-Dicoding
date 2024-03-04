@@ -1,3 +1,3 @@
 # Integrating-AI-for-Advancing-EduTech-in-Indonesia
 
-Web Result : private
+Web Result : https://text-processing.site/
